@@ -26,3 +26,19 @@
 *.exe
 *.out
 *.app
+
+##########################
+# Unreal editor exlusion #
+##########################
+*/Binaries
+*/Build
+*/DerivedDataCache
+*/Intermediate
+*/Saved
+EscapeRoom/Content/StarterContent
+
+###########################
+# Visual Studio exclusion #
+###########################
+*.VC.db
+*/.vs
