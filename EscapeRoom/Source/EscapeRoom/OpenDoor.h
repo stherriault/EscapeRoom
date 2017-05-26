@@ -33,7 +33,8 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* pressurePlate;
+
+	FRotator initialDoorRotation;
 	
-	UPROPERTY(EditAnywhere)
 	AActor* actorToOpenDoor;
 };
