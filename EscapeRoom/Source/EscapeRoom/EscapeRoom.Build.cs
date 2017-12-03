@@ -4,8 +4,10 @@ using UnrealBuildTool;
 
 public class EscapeRoom : ModuleRules
 {
-	public EscapeRoom(TargetInfo Target)
+	public EscapeRoom(ReadOnlyTargetRules Target) : base(Target)
 	{
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

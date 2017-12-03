@@ -5,21 +5,10 @@ using System.Collections.Generic;
 
 public class EscapeRoomEditorTarget : TargetRules
 {
-	public EscapeRoomEditorTarget(TargetInfo Target)
+	public EscapeRoomEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-	}
 
-	//
-	// TargetRules interface.
-	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "EscapeRoom" } );
+		ExtraModuleNames.AddRange( new string[] { "EscapeRoom" } );
 	}
 }
