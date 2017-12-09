@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "Components/InputComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -27,5 +29,18 @@ public:
 private:
 	UPROPERTY(EditAnywhere)
 	float reach = 100.0f;
-	
+
+	UPhysicsHandleComponent* physicsHandleComponent = nullptr;
+
+	UInputComponent* inputComponent = nullptr;
+
+	//Grab what's in view
+	void Grab();
+
+	//Release the grabbed object
+	void Release();
+
+	void FindPhysicsComponent();
+	void SetupInputComponent();
+	FHitResult GetFirstPhysicsBodyInReach();
 };
