@@ -24,7 +24,8 @@ protected:
 	void OpenDoor();
 	void CloseDoor();
 	void VerifyActorPresence();
-public:	
+	float GetTotalMassOfActorsOnPlate();
+public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -41,7 +42,5 @@ public:
 
 	FRotator initialDoorRotation;
 
-	AActor* actorToOpenDoor;
 	AActor* owner;
-	
 };
