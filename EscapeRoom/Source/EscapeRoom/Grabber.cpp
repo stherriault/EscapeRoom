@@ -2,6 +2,10 @@
 
 #include "Grabber.h"
 #include <DrawDebugHelpers.h>
+#include "Runtime/Engine/Classes/Engine/World.h"
+#include "Components/PrimitiveComponent.h"
+#include "Components/InputComponent.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
 
 
 // Sets default values for this component's properties

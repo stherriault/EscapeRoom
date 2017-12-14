@@ -1,6 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "OpenDoor.h"
+#include "GameFramework/Actor.h"
+#include "Engine/World.h"
+#include "Components/ActorComponent.h"
+#include "Components/PrimitiveComponent.h"
 
 
 // Sets default values for this component's properties
@@ -50,8 +54,9 @@ float UOpenDoor::GetTotalMassOfActorsOnPlate()
 	{
 		TArray<AActor*> overlappingActors;
 		pressurePlate->GetOverlappingActors(overlappingActors);
-		for(const auto* actor : overlappingActors)
+		for(const auto& actor : overlappingActors)
 		{
+			UE_LOG(LogTemp, Warning, TEXT("Actor %s is on the pressure plate"), *actor->GetName());
 			TotalMass += actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
 		}
 	}
