@@ -58,7 +58,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (physicsHandleComponent->GrabbedComponent != nullptr)
+	if (physicsHandleComponent != nullptr && physicsHandleComponent->GrabbedComponent != nullptr)
 	{
 		// Get player viewpoint
 		auto* player = GetWorld()->GetFirstPlayerController();
@@ -78,7 +78,7 @@ void UGrabber::Grab()
 	auto actorHit = hitResult.GetActor();
 
 	///Verify what we hit
-	if (actorHit != nullptr)
+	if (actorHit != nullptr && physicsHandleComponent != nullptr)
 	{
 		physicsHandleComponent->GrabComponentAtLocation(componentToGrab
 			, NAME_None
@@ -88,23 +88,29 @@ void UGrabber::Grab()
 
 void UGrabber::Release()
 {
-	physicsHandleComponent->ReleaseComponent();
+	if (physicsHandleComponent != nullptr)
+	{
+		physicsHandleComponent->ReleaseComponent();
+	}
 }
 
 FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 {
 	// Get player viewpoint
 	auto* player = GetWorld()->GetFirstPlayerController();
-
-	FVector pos;
-	FRotator rot;
-	player->GetPlayerViewPoint(pos, rot);
-
-	//Ray cast for a specific distance
-	FVector lineTraceEnd = pos + rot.Vector() * reach;
-
 	FHitResult outHit;
-	GetWorld()->LineTraceSingleByObjectType(outHit, pos, lineTraceEnd, { ECollisionChannel::ECC_PhysicsBody }, { FName(TEXT("")), false, GetOwner() });
+	
+	if (player != nullptr)
+	{
+		Vector pos;
+		FRotator rot;
+		player->GetPlayerViewPoint(pos, rot);
+
+		//Ray cast for a specific distance
+		FVector lineTraceEnd = pos + rot.Vector() * reach;
+
+		GetWorld()->LineTraceSingleByObjectType(outHit, pos, lineTraceEnd, { ECollisionChannel::ECC_PhysicsBody }, { FName(TEXT("")), false, GetOwner() });
+	}
 
 	return outHit;
 }
