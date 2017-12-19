@@ -102,7 +102,7 @@ FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 	
 	if (player != nullptr)
 	{
-		Vector pos;
+		FVector pos;
 		FRotator rot;
 		player->GetPlayerViewPoint(pos, rot);
 

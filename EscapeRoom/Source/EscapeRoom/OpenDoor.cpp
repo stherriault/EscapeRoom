@@ -24,26 +24,17 @@ void UOpenDoor::BeginPlay()
 	Super::BeginPlay();
 
 	owner = GetOwner();
-
-	initialDoorRotation = GetOwner()->GetActorRotation();
-}
-
-void UOpenDoor::OpenDoor()
-{
-	owner->SetActorRotation(initialDoorRotation - FRotator(0.0f, openAngle, 0.0f));
-}
-
-void UOpenDoor::CloseDoor()
-{
-	owner->SetActorRotation(initialDoorRotation);
 }
 
 void UOpenDoor::VerifyActorPresence()
 {
-	if (GetTotalMassOfActorsOnPlate() > 80.0f)
+	if (GetTotalMassOfActorsOnPlate() > requiredMass)
 	{
-		OpenDoor();
-		lastDoorOpenTime = GetWorld()->GetTimeSeconds();
+		OnOpen.Broadcast();
+	}
+	else
+	{
+		OnClose.Broadcast();
 	}
 }
 
@@ -70,10 +61,5 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	VerifyActorPresence();
-
-	if (GetWorld()->GetTimeSeconds() - lastDoorOpenTime > doorCloseDelay)
-	{
-		CloseDoor();
-	}
 }
 
